@@ -3,6 +3,7 @@ import webbrowser
 import os
 import wikipedia
 import pyautogui
+import pywhatkit
 
 def get_time():
     now = datetime.datetime.now()
@@ -34,3 +35,7 @@ def open_application(app_name):
 def close_active_window():
     pyautogui.hotkey('alt', 'f4')
     return "Closing active window"
+
+def play_youtube_video(song_name):
+    pywhatkit.playonyt(song_name)
+    return f"Playing {song_name} on YouTube"

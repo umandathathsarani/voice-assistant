@@ -1,7 +1,7 @@
 import sys
 from modules.speech import speak, listen
 import config
-from modules.actions import get_time, open_website, search_wikipedia, open_application, close_active_window
+from modules.actions import get_time, open_website, search_wikipedia, open_application, close_active_window, play_youtube_video
 from modules.ai import ask_ai
 
 def main():
@@ -22,6 +22,11 @@ def main():
         elif "time" in command:
             current_time = get_time()
             speak(f"The time is {current_time}")
+            
+        elif "play" in command:
+            song = command.replace("play", "").strip()
+            speak(f"Playing {song} on YouTube.")
+            play_youtube_video(song)
             
         elif "open google" in command:
             speak("Opening Google.")
