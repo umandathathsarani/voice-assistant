@@ -2,6 +2,7 @@ import datetime
 import webbrowser
 import os
 import wikipedia
+import pyautogui
 
 def get_time():
     now = datetime.datetime.now()
@@ -29,3 +30,7 @@ def open_application(app_name):
         return "Opening Calculator"
     else:
         return "Application not configured."
+
+def close_active_window():
+    pyautogui.hotkey('alt', 'f4')
+    return "Closing active window"
