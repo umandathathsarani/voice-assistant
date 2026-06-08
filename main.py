@@ -85,7 +85,7 @@ class UmoraGUI(ctk.CTk):
             threading.Thread(target=self.process_command, args=(command,), daemon=True).start()
 
     def run_core_loop(self):
-        welcome_text = f"Hello, I am {config.ASSISTANT_NAME}. My advanced AI routing system is online."
+        welcome_text = f"Hello, I am {config.ASSISTANT_NAME}. How can I help you today?"
         self.log_to_screen("SYSTEM", welcome_text)
         speak(welcome_text)
         
