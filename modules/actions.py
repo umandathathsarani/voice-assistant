@@ -39,3 +39,17 @@ def close_active_window():
 def play_youtube_video(song_name):
     pywhatkit.playonyt(song_name)
     return f"Playing {song_name} on YouTube"
+
+def control_system(action):
+    if action == "pause" or action == "play":
+        pyautogui.press("playpause")
+    elif action == "mute":
+        pyautogui.press("volumemute")
+    elif action == "volume up":
+        for _ in range(5):
+            pyautogui.press("volumeup")
+    elif action == "volume down":
+        for _ in range(5):
+            pyautogui.press("volumedown")
+    elif action == "clear":
+        os.system('cls' if os.name == 'nt' else 'clear')
