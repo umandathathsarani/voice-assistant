@@ -4,6 +4,7 @@ import os
 import wikipedia
 import pyautogui
 import pywhatkit
+import psutil
 
 def get_time():
     now = datetime.datetime.now()
@@ -53,3 +54,16 @@ def control_system(action):
             pyautogui.press("volumedown")
     elif action == "clear":
         os.system('cls' if os.name == 'nt' else 'clear')
+
+def get_system_stats():
+    cpu_usage = psutil.cpu_percent(interval=0.5)
+    ram_usage = psutil.virtual_memory().percent
+    battery = psutil.sensors_battery()
+    
+    response = f"Your CPU usage is at {cpu_usage} percent, and RAM usage is at {ram_usage} percent."
+    
+    if battery:
+        status = "charging" if battery.power_plugged else "not charging"
+        response += f" Your battery is at {battery.percent} percent and is currently {status}."
+        
+    return response
