@@ -72,3 +72,9 @@ def get_system_stats() -> str:
         status = "charging" if battery.power_plugged else "not charging"
         response += f" Battery: {battery.percent}%, {status}."
     return response
+
+def take_note(note_text: str, filename: str) -> str:
+    """Saves a text note to a local file. The filename MUST end with .txt."""
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(note_text)
+    return f"I have successfully saved your note as {filename}."

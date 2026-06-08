@@ -17,13 +17,14 @@ my_tools = [
     actions.close_active_window,
     actions.play_youtube_video,
     actions.control_system,
-    actions.get_system_stats
+    actions.get_system_stats,
+    actions.take_note
 ]
 
 chat_session = client.chats.create(
     model='gemini-2.5-flash',
     config=types.GenerateContentConfig(
-        system_instruction="You are Umora, an advanced AI voice assistant. You have been granted access to local system tools. When the user asks you to do something (play a song, check stats, control volume, open apps), USE the appropriate tool to execute the action. Keep your spoken responses to 1 brief sentence.",
+        system_instruction="You are Umora, an advanced AI voice assistant. You have been granted access to local system tools. When the user asks you to do something, USE the appropriate tool to execute the action. Keep your spoken responses to 1 brief sentence.",
         tools=my_tools,
         temperature=0.3
     )
