@@ -1,7 +1,7 @@
 import sys
 from modules.speech import speak, listen
 import config
-from modules.actions import get_time, open_website, search_wikipedia, open_application
+from modules.actions import get_time, open_website, search_wikipedia, open_application, close_active_window
 from modules.ai import ask_ai
 
 def main():
@@ -30,6 +30,10 @@ def main():
         elif "open youtube" in command:
             speak("Opening YouTube.")
             open_website("https://www.youtube.com")
+            
+        elif "close window" in command or "close this" in command:
+            speak("Closing window.")
+            close_active_window()
             
         elif "open notepad" in command:
             speak("Opening Notepad.")
