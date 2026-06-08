@@ -1,7 +1,7 @@
 import sys
 from modules.speech import speak, listen
 import config
-from modules.actions import get_time, open_website, search_wikipedia, open_application, close_active_window, play_youtube_video, control_system
+from modules.actions import get_time, open_website, search_wikipedia, open_application, close_active_window, play_youtube_video, control_system, get_system_stats
 from modules.ai import ask_ai
 
 def main():
@@ -22,6 +22,10 @@ def main():
         elif "time" in command:
             current_time = get_time()
             speak(f"The time is {current_time}")
+            
+        elif "system status" in command or "pc stats" in command or "hardware usage" in command:
+            stats = get_system_stats()
+            speak(stats)
             
         elif command.startswith("play "):
             song = command.replace("play ", "", 1).strip()
