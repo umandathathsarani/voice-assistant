@@ -1,7 +1,8 @@
 import sys
 from modules.speech import speak, listen
 import config
-from modules.actions import get_time, open_website
+from modules.actions import get_time, open_website, search_wikipedia, open_application
+from modules.ai import ask_ai
 
 def main():
     speak(f"Hello, I am {config.ASSISTANT_NAME}. Your hybrid voice system is online.")
@@ -26,11 +27,27 @@ def main():
             speak("Opening Google.")
             open_website("https://www.google.com")
             
-        elif "hello" in command or "hi" in command:
-            speak("Hello! How can I assist you today?")
+        elif "open youtube" in command:
+            speak("Opening YouTube.")
+            open_website("https://www.youtube.com")
+            
+        elif "open notepad" in command:
+            speak("Opening Notepad.")
+            open_application("notepad")
+            
+        elif "open calculator" in command:
+            speak("Opening Calculator.")
+            open_application("calculator")
+            
+        elif "wikipedia" in command:
+            speak("Searching Wikipedia...")
+            query = command.replace("wikipedia", "").strip()
+            result = search_wikipedia(query)
+            speak(result)
             
         else:
-            speak("Command not recognized.")
+            ai_response = ask_ai(command)
+            speak(ai_response)
 
 if __name__ == "__main__":
     main()

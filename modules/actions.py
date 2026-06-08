@@ -1,5 +1,7 @@
 import datetime
 import webbrowser
+import os
+import wikipedia
 
 def get_time():
     now = datetime.datetime.now()
@@ -8,3 +10,22 @@ def get_time():
 def open_website(url):
     webbrowser.open(url)
     return "Opening website"
+
+def search_wikipedia(query):
+    try:
+        results = wikipedia.summary(query, sentences=2)
+        return results
+    except wikipedia.exceptions.DisambiguationError:
+        return "There are too many results for that query."
+    except wikipedia.exceptions.PageError:
+        return "I could not find any results for that."
+
+def open_application(app_name):
+    if "notepad" in app_name:
+        os.system("notepad")
+        return "Opening Notepad"
+    elif "calculator" in app_name:
+        os.system("calc")
+        return "Opening Calculator"
+    else:
+        return "Application not configured."
