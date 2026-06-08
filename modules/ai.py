@@ -19,7 +19,8 @@ my_tools = [
     actions.control_system,
     actions.get_system_stats,
     actions.take_note,
-    actions.analyze_screen
+    actions.analyze_screen,
+    actions.get_weather
 ]
 
 chat_session = client.chats.create(

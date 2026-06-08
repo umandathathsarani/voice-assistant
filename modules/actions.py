@@ -6,6 +6,7 @@ import pyautogui
 import pywhatkit
 import psutil
 from google import genai
+import requests
 
 def get_time() -> str:
     """Returns the current local time."""
@@ -92,3 +93,14 @@ def analyze_screen(question: str) -> str:
         return response.text.replace("*", "").replace("#", "")
     except Exception as e:
         return f"Failed to analyze screen: {str(e)}"
+
+def get_weather(city: str) -> str:
+    """Gets the current real-time weather conditions and temperature for a specified city."""
+    try:
+        response = requests.get(f"https://wttr.in/{city}?format=%C+%t")
+        if response.status_code == 200:
+            return f"The current weather in {city} is {response.text.strip()}."
+        else:
+            return f"Could not locate weather data for {city}."
+    except Exception as e:
+        return f"Failed to connect to weather service: {str(e)}"
