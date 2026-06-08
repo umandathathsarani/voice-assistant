@@ -18,7 +18,8 @@ my_tools = [
     actions.play_youtube_video,
     actions.control_system,
     actions.get_system_stats,
-    actions.take_note
+    actions.take_note,
+    actions.analyze_screen
 ]
 
 chat_session = client.chats.create(

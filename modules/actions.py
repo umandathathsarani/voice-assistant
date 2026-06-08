@@ -5,6 +5,7 @@ import wikipedia
 import pyautogui
 import pywhatkit
 import psutil
+from google import genai
 
 def get_time() -> str:
     """Returns the current local time."""
@@ -78,3 +79,16 @@ def take_note(note_text: str, filename: str) -> str:
     with open(filename, "w", encoding="utf-8") as file:
         file.write(note_text)
     return f"I have successfully saved your note as {filename}."
+
+def analyze_screen(question: str) -> str:
+    """Takes a screenshot of the user's current computer screen and answers a question about it. Use this when the user asks you to look at their screen."""
+    screenshot = pyautogui.screenshot()
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+    try:
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=[f"Look at this screenshot and answer: {question}. Keep it to 1 or 2 concise sentences.", screenshot]
+        )
+        return response.text.replace("*", "").replace("#", "")
+    except Exception as e:
+        return f"Failed to analyze screen: {str(e)}"
