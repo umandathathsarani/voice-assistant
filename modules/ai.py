@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
 load_dotenv()
 
@@ -9,7 +10,9 @@ client = genai.Client(api_key=api_key)
 
 chat_session = client.chats.create(
     model='gemini-2.5-flash',
-    config={"system_instruction": "You are a helpful, concise voice assistant named Jarvis. Keep answers to 2 sentences max."}
+    config=types.GenerateContentConfig(
+        system_instruction="You are a helpful, concise voice assistant named Umora. Keep answers to 2 sentences max."
+    )
 )
 
 def ask_ai(prompt):

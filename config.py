@@ -1,4 +1,4 @@
-ASSISTANT_NAME = "Jarvis"
+ASSISTANT_NAME = "Umora"
 
 # True --> To bypass the network and force offline processing via PocketSphinx.
 # False --> To try high-accuracy cloud parsing first.
