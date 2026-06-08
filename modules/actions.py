@@ -7,6 +7,8 @@ import pywhatkit
 import psutil
 from google import genai
 import requests
+import threading
+import time
 
 def get_time() -> str:
     """Returns the current local time."""
@@ -104,3 +106,15 @@ def get_weather(city: str) -> str:
             return f"Could not locate weather data for {city}."
     except Exception as e:
         return f"Failed to connect to weather service: {str(e)}"
+
+def reminder_worker(duration_seconds: int, message: str):
+    time.sleep(duration_seconds)
+    from modules.speech import speak
+    speak(f"Attention, reminder: {message}")
+
+def set_reminder(duration_minutes: float, message: str) -> str:
+    """Sets a background reminder timer that will speak a message out loud after a specific duration in minutes has passed. This function executes asynchronously without freezing the assistant loop."""
+    duration_seconds = int(duration_minutes * 60)
+    thread = threading.Thread(target=reminder_worker, args=(duration_seconds, message), daemon=True)
+    thread.start()
+    return f"Reminder configured for {duration_minutes} minutes from now."
