@@ -7,12 +7,14 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=api_key)
 
+chat_session = client.chats.create(
+    model='gemini-2.5-flash',
+    config={"system_instruction": "You are a helpful, concise voice assistant named Jarvis. Keep answers to 2 sentences max."}
+)
+
 def ask_ai(prompt):
     try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=f"You are a helpful, concise voice assistant named Jarvis. Keep answers to 2 sentences max. User says: {prompt}"
-        )
+        response = chat_session.send_message(prompt)
         clean_text = response.text.replace("*", "").replace("#", "")
         return clean_text
     except Exception as e:
